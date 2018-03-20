@@ -1,4 +1,5 @@
-﻿using MyEshop.Core.Models;
+﻿using MyEshop.Core.Contracts;
+using MyEshop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyEshop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -30,6 +31,7 @@ namespace MyEshop.DataAccess.InMemory
         {
             cache[className] = items;
         }
+
 
         //  Inserts a product to product list
         public void Insert(T t)
